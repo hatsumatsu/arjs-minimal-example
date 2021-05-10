@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "yarn parcel build index.html --no-minify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,5 +13,10 @@
   "dependencies": {
     "@ar-js-org/ar.js": "https://github.com/AR-js-org/AR.js.git#ecc992c1a628b5f26d437949620bfe6cab386da3",
     "three": "^0.127.0"
+  },
+  "devDependencies": {
+    "cssnano": "^5.0.2",
+    "parcel-bundler": "^1.12.5",
+    "postcss": "^8.2.1"
   }
 }
