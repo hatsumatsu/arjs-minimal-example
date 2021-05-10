@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "yarn parcel build index.html --no-minify",
+    "build": "parcel build index.html --no-minify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
