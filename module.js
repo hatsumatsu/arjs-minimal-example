@@ -55,6 +55,8 @@ arToolkitSource.init(function onReady(){
     setTimeout(() => {
         onResize()
     }, 2000);
+
+    console.log( 'arToolkitSource', arToolkitSource );
 })
 
 // handle resize
@@ -87,6 +89,8 @@ var arToolkitContext = new ArToolkitContext({
 arToolkitContext.init(function onCompleted(){
 	// copy projection matrix to camera
 	camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+
+	console.log( 'arToolkitContext', arToolkitContext );
 })
 
 // update artoolkit on every frame
