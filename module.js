@@ -83,7 +83,10 @@ var arToolkitContext = new ArToolkitContext({
 	cameraParametersUrl: cameraParam,
 	detectionMode: 'mono_and_matrix',
 	matrixCodeType: '3x3',
-	patternRatio: 0.5
+	patternRatio: 0.5,
+
+	canvasWidth: 480,
+    canvasHeight: 640,
 })
 // initialize it
 arToolkitContext.init(function onCompleted(){
