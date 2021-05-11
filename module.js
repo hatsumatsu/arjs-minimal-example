@@ -80,15 +80,16 @@ function initScene() {
 
 
 function initAR() {
+	console.log( 'window', window.innerWidth, window.innerHeight );
 	// SOURCE
 	arToolkitSource = new ArToolkitSource({
 		// to read from the webcam
 		sourceType : 'webcam',
 
-		// sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
-		// sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
-		sourceWidth: 640,
-		sourceHeight: 480,		
+		sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
+		sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
+		// sourceWidth: 640,
+		// sourceHeight: 480,		
 		// displayWidth: 480,
 		// displayHeight: 640,	
 
@@ -117,8 +118,11 @@ function initAR() {
 				matrixCodeType: '3x3',
 				patternRatio: 0.5,
 
+				// canvasWidth: arToolkitSource.domElement.videoWidth,
+				// canvasHeight: arToolkitSource.domElement.videoHeight
+
 				canvasWidth: 640,
-				canvasHeight: 480
+				canvasHeight: 480				
 			})
 			arToolkitContext.init(function onCompleted(){
 				camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
@@ -202,11 +206,11 @@ window.addEventListener('resize', function(){
 })
 
 function onResize(){
-	arToolkitSource.onResizeElement()
-	arToolkitSource.copyElementSizeTo(renderer.domElement)
-	if( arToolkitContext.arController !== null ) {
-		arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
-	}
+	// arToolkitSource.onResizeElement()
+	// arToolkitSource.copyElementSizeTo(renderer.domElement)
+	// if( arToolkitContext.arController !== null ) {
+	// 	arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
+	// }
 
 
 	// set orientation of arController
