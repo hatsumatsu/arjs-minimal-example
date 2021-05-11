@@ -99,13 +99,12 @@ function initARSource() {
 		// displayHeight: 640,	
 	})
 
-	arToolkitSource.init(function onReady(){
+	arToolkitSource.init( function onReady() {
 	    // setTimeout(() => {
 	    //     onResize()
 	    // }, 2000);
 
 	    // setTimeout( function() {
-			initARContext()
 		// }, 1000 );	    
 
 	    console.log( 'arToolkitSource', arToolkitSource, arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight );
@@ -124,7 +123,8 @@ function initARContext() {
 		// canvasWidth: arToolkitSource.domElement.videoWidth,
 		// canvasHeight: arToolkitSource.domElement.videoHeight				
 	})
-	arToolkitContext.init(function onCompleted(){
+
+	arToolkitContext.init( function onCompleted() {
 		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
 
 		arToolkitContext.arController.orientation = getSourceOrientation();
@@ -152,9 +152,10 @@ function initARContext() {
 
 function initAR() {
 	console.log( 'window', window.innerWidth, window.innerHeight );
-	// SOURCE
+	
 	
 	initARSource();
+	initARContext()
 
 	onRenderFcts.push(function(){
 		if( !arToolkitContext || !arToolkitSource || arToolkitSource.ready === false ) {
@@ -172,15 +173,29 @@ function init() {
 	initAR();	
 }
 
-
-function disposeSource() {
-	const video = document.querySelectorAll( '#arjs-video' );
+function disposeARSource() {
+	const video = document.querySelector( '#arjs-video' );
     
-    if(video) {
-        video.srcObject.getTracks().map((track) => track.stop());
+    if (video) {
+        video?.srcObject?.getTracks().map((track) => track.stop());
         video.remove();
     }	
+
+    arToolkitSource = null;
 }
+
+function disposeARContext() {
+    if (arToolkitContext?.arController?.cameraParam?.dispose) {
+        arToolkitContext?.arController.cameraParam.dispose();
+    }
+
+    if (arToolkitContext?.arController?.dispose) {
+        arToolkitContext?.arController?.dispose();
+    }
+
+    arToolkitContext = null;
+}
+
 
 
 
@@ -218,12 +233,17 @@ function onResize(){
 
 
 	// set orientation of arController
-	if( arToolkitContext.arController !== null ) {
-		arToolkitContext.arController.orientation = getSourceOrientation();
-		arToolkitContext.arController.options.orientation = getSourceOrientation();
+	// if( arToolkitContext.arController !== null ) {
+	// 	arToolkitContext.arController.orientation = getSourceOrientation();
+	// 	arToolkitContext.arController.options.orientation = getSourceOrientation();
 
-		console.log( 'Context.arController', arToolkitContext.arController.width, arToolkitContext.arController.height, arToolkitContext.arController.orientation );
-	}
+	// 	console.log( 'Context.arController', arToolkitContext.arController.width, arToolkitContext.arController.height, arToolkitContext.arController.orientation );
+	// }
+	
+	disposeARContext();
+	disposeARSource();
+
+	initAR(); 
 }
 
 
