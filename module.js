@@ -57,20 +57,8 @@ arToolkitSource.init(function onReady(){
     }, 2000);
 
     console.log( 'arToolkitSource', arToolkitSource );
+    window.arToolkitSource = arToolkitSource;
 })
-
-// handle resize
-window.addEventListener('resize', function(){
-	onResize()
-})
-
-function onResize(){
-	arToolkitSource.onResizeElement()
-	arToolkitSource.copyElementSizeTo(renderer.domElement)
-	if( arToolkitContext.arController !== null ){
-		arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
-	}
-}
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -84,9 +72,6 @@ var arToolkitContext = new ArToolkitContext({
 	detectionMode: 'mono_and_matrix',
 	matrixCodeType: '3x3',
 	patternRatio: 0.5,
-
-	canvasWidth: 480,
-    canvasHeight: 640,
 })
 // initialize it
 arToolkitContext.init(function onCompleted(){
@@ -94,6 +79,7 @@ arToolkitContext.init(function onCompleted(){
 	camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
 
 	console.log( 'arToolkitContext', arToolkitContext );
+	window.arToolkitContext = arToolkitContext;
 })
 
 // update artoolkit on every frame
@@ -120,6 +106,10 @@ var markerControls = new ArMarkerControls(arToolkitContext, camera, {
 	// as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
 	changeMatrixMode: 'cameraTransformMatrix'
 })
+
+console.log( 'ArMarkerControls', ArMarkerControls );
+window.ArMarkerControls = ArMarkerControls;
+
 // as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
 scene.visible = false
 
@@ -157,6 +147,8 @@ onRenderFcts.push(function(){
 	renderer.render( scene, camera );
 })
 
+
+
 // run the rendering loop
 var lastTimeMsec= null
 requestAnimationFrame(function animate(nowMsec){
@@ -171,3 +163,16 @@ requestAnimationFrame(function animate(nowMsec){
 		onRenderFct(deltaMsec/1000, nowMsec/1000)
 	})
 })
+
+// handle resize
+window.addEventListener('resize', function(){
+	onResize()
+})
+
+function onResize(){
+	arToolkitSource.onResizeElement()
+	arToolkitSource.copyElementSizeTo(renderer.domElement)
+	if( arToolkitContext.arController !== null ){
+		arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
+	}
+}
