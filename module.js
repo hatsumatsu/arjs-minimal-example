@@ -110,8 +110,6 @@ function initAR() {
 	    window.arToolkitSource = arToolkitSource;
 
 	    setTimeout( function() {
-	    	renderer.setSize( arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight );
-
 			// CONTEXT
 			arToolkitContext = new ArToolkitContext({
 				cameraParametersUrl: cameraParam,
@@ -119,8 +117,8 @@ function initAR() {
 				matrixCodeType: '3x3',
 				patternRatio: 0.5,
 
-				canvasWidth: arToolkitSource.domElement.videoWidth,
-				canvasHeight: arToolkitSource.domElement.videoHeight
+				canvasWidth: 640,
+				canvasHeight: 480
 			})
 			arToolkitContext.init(function onCompleted(){
 				camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
