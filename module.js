@@ -110,6 +110,8 @@ function initAR() {
 	    window.arToolkitSource = arToolkitSource;
 
 	    setTimeout( function() {
+	    	renderer.setSize( arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight );
+
 			// CONTEXT
 			arToolkitContext = new ArToolkitContext({
 				cameraParametersUrl: cameraParam,
