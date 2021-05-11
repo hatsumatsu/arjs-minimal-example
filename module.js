@@ -86,8 +86,8 @@ arToolkitContext.init(function onCompleted(){
 	// copy projection matrix to camera
 	camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
 
-	arToolkitContext.arController.orientation = 'portrait';
-	arToolkitContext.arController.options.orientation = 'portrait';
+	arToolkitContext.arController.orientation = getOrientation();
+	arToolkitContext.arController.options.orientation = getOrientation();
 
 	console.log( 'arToolkitContext', arToolkitContext );
 	window.arToolkitContext = arToolkitContext;
@@ -183,7 +183,24 @@ window.addEventListener('resize', function(){
 function onResize(){
 	arToolkitSource.onResizeElement()
 	arToolkitSource.copyElementSizeTo(renderer.domElement)
-	if( arToolkitContext.arController !== null ){
+	if( arToolkitContext.arController !== null ) {
 		arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
+	}
+
+
+	// set orientation of arController
+	if( arToolkitContext.arController !== null ) {
+		arToolkitContext.arController.orientation = getOrientation();
+		arToolkitContext.arController.options.orientation = getOrientation();
+	}
+}
+
+function getOrientation() {
+	if( window.innerWidth > window.innerHeight ) {
+		console.log( 'landscape' );
+		return 'landscape';
+	} else {
+		console.log( 'portrait' );
+		return 'portrait';
 	}
 }
