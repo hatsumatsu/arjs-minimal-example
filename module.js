@@ -44,8 +44,8 @@ var arToolkitSource = new ArToolkitSource({
 
 	sourceWidth: 480,
 	sourceHeight: 640,
-	displayWidth: 480,
-	displayHeight: 640,	
+	// displayWidth: 480,
+	// displayHeight: 640,	
 
 	// // to read from an image
 	// sourceType : 'image',
