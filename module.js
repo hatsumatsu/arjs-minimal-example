@@ -81,8 +81,8 @@ function initAR() {
 		// to read from the webcam
 		sourceType : 'webcam',
 
-		sourceWidth: 640,
-		sourceHeight: 480,
+		sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
+		sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
 		// displayWidth: 480,
 		// displayHeight: 640,	
 
