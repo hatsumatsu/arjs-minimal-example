@@ -197,7 +197,9 @@ function onResize() {
     disposeARContext();
     disposeARSource();
 
-    initAR();
+    setTimeout(() => {
+        initAR();
+    }, 1000);
 }
 
 function bindEvents() {
