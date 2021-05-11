@@ -1,4 +1,4 @@
-import { ArToolkitProfile, ArToolkitSource, ArToolkitContext, ArMarkerControls} from '@ar-js-org/ar.js/three.js/build/ar-threex.js';
+import { ArToolkitProfile, ArToolkitSource, ArToolkitContext, ArMarkerControls} from '@hatsumatsu/ar.js/three.js/build/ar-threex.js';
 import * as THREE from 'three';
 
 import cameraParam from '/data/camera_para.dat';
@@ -42,6 +42,11 @@ var arToolkitSource = new ArToolkitSource({
 	// to read from the webcam
 	sourceType : 'webcam',
 
+	sourceWidth: 480,
+	sourceHeight: 640,
+	displayWidth: 480,
+	displayHeight: 640,	
+
 	// // to read from an image
 	// sourceType : 'image',
 	// sourceUrl : ArToolkitContext.baseURL + '../data/images/img.jpg',
@@ -72,11 +77,17 @@ var arToolkitContext = new ArToolkitContext({
 	detectionMode: 'mono_and_matrix',
 	matrixCodeType: '3x3',
 	patternRatio: 0.5,
+
+	// canvasWidth: 480,
+	// canvasHeight: 640
 })
 // initialize it
 arToolkitContext.init(function onCompleted(){
 	// copy projection matrix to camera
 	camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+
+	arToolkitContext.arController.orientation = 'portrait';
+	arToolkitContext.arController.options.orientation = 'portrait';
 
 	console.log( 'arToolkitContext', arToolkitContext );
 	window.arToolkitContext = arToolkitContext;
