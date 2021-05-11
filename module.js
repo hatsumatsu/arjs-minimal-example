@@ -187,6 +187,8 @@ function getOrientation() {
 		return null;
 	}
 
+	console.log( 'actual source dimensions', arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight )
+
 	if( arToolkitSource.domElement.videoWidth > arToolkitSource.domElement.videoHeight ) {
 		console.log( 'landscape' );
 		return 'landscape';
