@@ -82,7 +82,7 @@ function initAR() {
 		sourceType : 'webcam',
 
 		sourceWidth: 640,
-		sourceHeight: 640,
+		sourceHeight: 480,
 		// displayWidth: 480,
 		// displayHeight: 640,	
 
@@ -102,43 +102,46 @@ function initAR() {
 
 	    console.log( 'arToolkitSource', arToolkitSource );
 	    window.arToolkitSource = arToolkitSource;
+
+
+		// CONTEXT
+		arToolkitContext = new ArToolkitContext({
+			cameraParametersUrl: cameraParam,
+			detectionMode: 'mono_and_matrix',
+			matrixCodeType: '3x3',
+			patternRatio: 0.5,
+
+			canvasWidth: arToolkitSource.domElement.videoWidth,
+			canvasHeight: arToolkitSource.domElement.videoHeight
+		})
+		arToolkitContext.init(function onCompleted(){
+			camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+
+			arToolkitContext.arController.orientation = getSourceOrientation();
+			arToolkitContext.arController.options.orientation = getSourceOrientation();
+
+			console.log( 'arToolkitContext', arToolkitContext );
+			window.arToolkitContext = arToolkitContext;
+		})
+
+
+		// MARKER
+		var markerControls = new ArMarkerControls(arToolkitContext, camera, {
+			type : 'barcode',
+			barcodeValue: 0,
+			smooth: true,
+			// patternUrl : './data/data/patt.hiro',
+			// patternUrl : ArToolkitContext.baseURL + '../data/data/patt.kanji',
+			// as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
+			changeMatrixMode: 'cameraTransformMatrix'
+		})
+
+		console.log( 'ArMarkerControls', ArMarkerControls );
+		window.ArMarkerControls = ArMarkerControls; 	    
 	})
 
 
-	// CONTEXT
-	arToolkitContext = new ArToolkitContext({
-		cameraParametersUrl: cameraParam,
-		detectionMode: 'mono_and_matrix',
-		matrixCodeType: '3x3',
-		patternRatio: 0.5,
 
-		// canvasWidth: 480,
-		// canvasHeight: 640
-	})
-	arToolkitContext.init(function onCompleted(){
-		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
-
-		arToolkitContext.arController.orientation = getSourceOrientation();
-		arToolkitContext.arController.options.orientation = getSourceOrientation();
-
-		console.log( 'arToolkitContext', arToolkitContext );
-		window.arToolkitContext = arToolkitContext;
-	})
-
-
-	// MARKER
-	var markerControls = new ArMarkerControls(arToolkitContext, camera, {
-		type : 'barcode',
-		barcodeValue: 0,
-		smooth: true,
-		// patternUrl : './data/data/patt.hiro',
-		// patternUrl : ArToolkitContext.baseURL + '../data/data/patt.kanji',
-		// as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
-		changeMatrixMode: 'cameraTransformMatrix'
-	})
-
-	console.log( 'ArMarkerControls', ArMarkerControls );
-	window.ArMarkerControls = ArMarkerControls; 
 
 
 
