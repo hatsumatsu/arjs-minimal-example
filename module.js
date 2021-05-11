@@ -30,11 +30,11 @@ function initScene() {
 		alpha: true
 	});
 	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-	if( window.innerWidth > window.innerHeight ) {
+	// if( window.innerWidth > window.innerHeight ) {
 		renderer.setSize( 640, 480 );
-	} else {
-		renderer.setSize( 480, 640 );
-	}
+	// } else {
+		// renderer.setSize( 480, 640 );
+	// }
 	renderer.domElement.style.position = 'absolute'
 	renderer.domElement.style.top = '0px'
 	renderer.domElement.style.left = '0px'
@@ -85,10 +85,10 @@ function initAR() {
 		// to read from the webcam
 		sourceType : 'webcam',
 
-		sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
-		sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
-		// sourceWidth: 640,
-		// sourceHeight: 480,		
+		// sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
+		// sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
+		sourceWidth: 640,
+		sourceHeight: 480,		
 		// displayWidth: 480,
 		// displayHeight: 640,	
 
