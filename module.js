@@ -30,7 +30,11 @@ function initScene() {
 		alpha: true
 	});
 	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-	renderer.setSize( 640, 480 );
+	if( window.innerWidth > window.innerHeight ) {
+		renderer.setSize( 640, 480 );
+	} else {
+		renderer.setSize( 480, 640 );
+	}
 	renderer.domElement.style.position = 'absolute'
 	renderer.domElement.style.top = '0px'
 	renderer.domElement.style.left = '0px'
@@ -113,8 +117,8 @@ function initAR() {
 				matrixCodeType: '3x3',
 				patternRatio: 0.5,
 
-				// canvasWidth: arToolkitSource.domElement.videoWidth,
-				// canvasHeight: arToolkitSource.domElement.videoHeight
+				canvasWidth: arToolkitSource.domElement.videoWidth,
+				canvasHeight: arToolkitSource.domElement.videoHeight
 			})
 			arToolkitContext.init(function onCompleted(){
 				camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
@@ -209,6 +213,19 @@ function onResize(){
 	if( arToolkitContext.arController !== null ) {
 		arToolkitContext.arController.orientation = getSourceOrientation();
 		arToolkitContext.arController.options.orientation = getSourceOrientation();
+	}
+}
+
+
+
+
+
+
+function getScreenOrientation() {
+	if( window.innerWidth > window.innerHeight ) {
+		return 'landscape';
+	} else {
+		return 'portrait';
 	}
 }
 
