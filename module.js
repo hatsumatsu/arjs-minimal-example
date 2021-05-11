@@ -80,6 +80,7 @@ function initScene() {
 
 
 function initARSource() {
+	console.log( 'requesting a source with', window.innerWidth > window.innerHeight ? 640 : 480, window.innerWidth > window.innerHeight ? 480 : 640 );
 	arToolkitSource = new ArToolkitSource({
 		// to read from the webcam
 		sourceType : 'webcam',
