@@ -177,7 +177,9 @@ requestAnimationFrame(function animate(nowMsec){
 
 // handle resize
 window.addEventListener('resize', function(){
-	onResize()
+	setTimeout(() => {
+		onResize()
+	}, 2000 );
 })
 
 function onResize(){
