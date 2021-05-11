@@ -1,3 +1,14 @@
+/// TEST:
+/// Make a working example on portrait:
+/// 	ARSource 
+/// 		sourceWidth: 480,
+/// 		sourceHeight: 640
+///
+///     renderer.setSize( 640, 480 )
+///
+///     ARContext
+///         no canvas dimensions set     
+
 import { ArToolkitProfile, ArToolkitSource, ArToolkitContext, ArMarkerControls} from '@hatsumatsu/ar.js/three.js/build/ar-threex.js';
 import * as THREE from 'three';
 
@@ -70,7 +81,7 @@ function initAR() {
 		// to read from the webcam
 		sourceType : 'webcam',
 
-		sourceWidth: 480,
+		sourceWidth: 640,
 		sourceHeight: 640,
 		// displayWidth: 480,
 		// displayHeight: 640,	
@@ -107,8 +118,8 @@ function initAR() {
 	arToolkitContext.init(function onCompleted(){
 		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
 
-		arToolkitContext.arController.orientation = getOrientation();
-		arToolkitContext.arController.options.orientation = getOrientation();
+		arToolkitContext.arController.orientation = getSourceOrientation();
+		arToolkitContext.arController.options.orientation = getSourceOrientation();
 
 		console.log( 'arToolkitContext', arToolkitContext );
 		window.arToolkitContext = arToolkitContext;
@@ -177,12 +188,12 @@ function onResize(){
 
 	// set orientation of arController
 	if( arToolkitContext.arController !== null ) {
-		arToolkitContext.arController.orientation = getOrientation();
-		arToolkitContext.arController.options.orientation = getOrientation();
+		arToolkitContext.arController.orientation = getSourceOrientation();
+		arToolkitContext.arController.options.orientation = getSourceOrientation();
 	}
 }
 
-function getOrientation() {
+function getSourceOrientation() {
 	if( !arToolkitSource ) {
 		return null;
 	}
