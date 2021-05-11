@@ -8,6 +8,12 @@
 ///
 ///     ARContext
 ///         no canvas dimensions set     
+///         
+///         
+///         
+///  WORKS IN BOTH ORIENTATIONS:
+///  	sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
+///		sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
 
 import { ArToolkitProfile, ArToolkitSource, ArToolkitContext, ArMarkerControls} from '@hatsumatsu/ar.js/three.js/build/ar-threex.js';
 import * as THREE from 'three';
@@ -85,22 +91,22 @@ function initARSource() {
 		// to read from the webcam
 		sourceType : 'webcam',
 
-		// sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
-		// sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
-		sourceWidth: 640,
-		sourceHeight: 480,		
+		sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
+		sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
+		// sourceWidth: 640,
+		// sourceHeight: 480,		
 		// displayWidth: 480,
 		// displayHeight: 640,	
 	})
 
 	arToolkitSource.init(function onReady(){
-	    setTimeout(() => {
-	        onResize()
-	    }, 2000);
+	    // setTimeout(() => {
+	    //     onResize()
+	    // }, 2000);
 
-	    setTimeout( function() {
+	    // setTimeout( function() {
 			initARContext()
-		}, 1000 );	    
+		// }, 1000 );	    
 
 	    console.log( 'arToolkitSource', arToolkitSource, arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight );
 	    window.arToolkitSource = arToolkitSource;		
