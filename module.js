@@ -213,6 +213,8 @@ function onResize(){
 	if( arToolkitContext.arController !== null ) {
 		arToolkitContext.arController.orientation = getSourceOrientation();
 		arToolkitContext.arController.options.orientation = getSourceOrientation();
+
+		console.log( 'Context.arController', arToolkitContext.arController.width, arToolkitContext.arController.height, arToolkitContext.arController.orientation );
 	}
 }
 
@@ -237,10 +239,10 @@ function getSourceOrientation() {
 	console.log( 'actual source dimensions', arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight )
 
 	if( arToolkitSource.domElement.videoWidth > arToolkitSource.domElement.videoHeight ) {
-		console.log( 'landscape' );
+		console.log( 'source orientation', 'landscape' );
 		return 'landscape';
 	} else {
-		console.log( 'portrait' );
+		console.log( 'source orientation', 'portrait' );
 		return 'portrait';
 	}
 }
