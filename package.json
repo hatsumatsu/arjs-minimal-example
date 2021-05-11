@@ -1,23 +1,23 @@
 {
-  "name": "arjs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "parcel build index.html --no-minify",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@ar-js-org/ar.js": "https://github.com/AR-js-org/AR.js.git#ecc992c1a628b5f26d437949620bfe6cab386da3",
-    "@hatsumatsu/ar.js": "https://github.com/hatsumatsu/AR.js.git#865e215c70778a4d30b0a567d1a012f06ae0ad19",
-    "three": "^0.127.0"
-  },
-  "devDependencies": {
-    "cssnano": "^5.0.2",
-    "parcel-bundler": "^1.12.5",
-    "postcss": "^8.2.1"
-  }
+    "name": "arjs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "parcel build index.html --no-minify",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@ar-js-org/ar.js": "https://github.com/AR-js-org/AR.js.git#ecc992c1a628b5f26d437949620bfe6cab386da3",
+        "@hatsumatsu/ar.js": "https://github.com/hatsumatsu/AR.js.git#fce66fe93cfe44bdb357c2b9ba33c247a811dc0b",
+        "three": "^0.127.0"
+    },
+    "devDependencies": {
+        "cssnano": "^5.0.2",
+        "parcel-bundler": "^1.12.5",
+        "postcss": "^8.2.1"
+    }
 }
