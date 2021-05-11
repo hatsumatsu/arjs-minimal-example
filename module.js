@@ -30,11 +30,7 @@ function initScene() {
 		alpha: true
 	});
 	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-	// if( window.innerWidth > window.innerHeight ) {
-		renderer.setSize( 640, 480 );
-	// } else {
-		// renderer.setSize( 480, 640 );
-	// }
+	renderer.setSize( 640, 480 );
 	renderer.domElement.style.position = 'absolute'
 	renderer.domElement.style.top = '0px'
 	renderer.domElement.style.left = '0px'
@@ -79,9 +75,11 @@ function initScene() {
 }
 
 
-function initAR() {
-	console.log( 'window', window.innerWidth, window.innerHeight );
-	// SOURCE
+
+
+
+
+function initARSource() {
 	arToolkitSource = new ArToolkitSource({
 		// to read from the webcam
 		sourceType : 'webcam',
@@ -92,14 +90,6 @@ function initAR() {
 		// sourceHeight: 480,		
 		// displayWidth: 480,
 		// displayHeight: 640,	
-
-		// // to read from an image
-		// sourceType : 'image',
-		// sourceUrl : ArToolkitContext.baseURL + '../data/images/img.jpg',
-
-		// to read from a video
-		// sourceType : 'video',
-		// sourceUrl : ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',
 	})
 
 	arToolkitSource.init(function onReady(){
@@ -107,55 +97,57 @@ function initAR() {
 	        onResize()
 	    }, 2000);
 
-	    console.log( 'arToolkitSource', arToolkitSource, arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight );
-	    window.arToolkitSource = arToolkitSource;
-
 	    setTimeout( function() {
-			// CONTEXT
-			arToolkitContext = new ArToolkitContext({
-				cameraParametersUrl: cameraParam,
-				detectionMode: 'mono_and_matrix',
-				matrixCodeType: '3x3',
-				patternRatio: 0.5,
-
-				// canvasWidth: arToolkitSource.domElement.videoWidth,
-				// canvasHeight: arToolkitSource.domElement.videoHeight
-
-				canvasWidth: 640,
-				canvasHeight: 480				
-			})
-			arToolkitContext.init(function onCompleted(){
-				camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
-
-				arToolkitContext.arController.orientation = getSourceOrientation();
-				arToolkitContext.arController.options.orientation = getSourceOrientation();
-
-				console.log( 'arToolkitContext', arToolkitContext );
-				window.arToolkitContext = arToolkitContext;
-			})
-
-
-			// MARKER
-			var markerControls = new ArMarkerControls(arToolkitContext, camera, {
-				type : 'barcode',
-				barcodeValue: 0,
-				smooth: true,
-				// patternUrl : './data/data/patt.hiro',
-				// patternUrl : ArToolkitContext.baseURL + '../data/data/patt.kanji',
-				// as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
-				changeMatrixMode: 'cameraTransformMatrix'
-			})
-
-			console.log( 'ArMarkerControls', ArMarkerControls );
-			window.ArMarkerControls = ArMarkerControls; 
-
+			initARContext()
 		}, 1000 );	    
+
+	    console.log( 'arToolkitSource', arToolkitSource, arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight );
+	    window.arToolkitSource = arToolkitSource;		
+	})
+}
+
+function initARContext() {
+	// CONTEXT
+	arToolkitContext = new ArToolkitContext({
+		cameraParametersUrl: cameraParam,
+		detectionMode: 'mono_and_matrix',
+		matrixCodeType: '3x3',
+		patternRatio: 0.5,
+
+		// canvasWidth: arToolkitSource.domElement.videoWidth,
+		// canvasHeight: arToolkitSource.domElement.videoHeight				
+	})
+	arToolkitContext.init(function onCompleted(){
+		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+
+		arToolkitContext.arController.orientation = getSourceOrientation();
+		arToolkitContext.arController.options.orientation = getSourceOrientation();
+
+		console.log( 'arToolkitContext', arToolkitContext );
+		window.arToolkitContext = arToolkitContext;
 	})
 
 
+	// MARKER
+	var markerControls = new ArMarkerControls(arToolkitContext, camera, {
+		type : 'barcode',
+		barcodeValue: 0,
+		smooth: true,
+		// patternUrl : './data/data/patt.hiro',
+		// patternUrl : ArToolkitContext.baseURL + '../data/data/patt.kanji',
+		// as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
+		changeMatrixMode: 'cameraTransformMatrix'
+	})
 
+	console.log( 'ArMarkerControls', ArMarkerControls );
+	window.ArMarkerControls = ArMarkerControls; 	
+}
 
-
+function initAR() {
+	console.log( 'window', window.innerWidth, window.innerHeight );
+	// SOURCE
+	
+	initARSource();
 
 	onRenderFcts.push(function(){
 		if( !arToolkitContext || !arToolkitSource || arToolkitSource.ready === false ) {
@@ -168,19 +160,24 @@ function initAR() {
 	})	
 }
 
-
-
-function initARSource() {
-
-}
-
-function initARContext() {
-	
+function init() {
+	initScene();
+	initAR();	
 }
 
 
-initScene();
-initAR();
+function disposeSource() {
+	const video = document.querySelectorAll( '#arjs-video' );
+    
+    if(video) {
+        video.srcObject.getTracks().map((track) => track.stop());
+        video.remove();
+    }	
+}
+
+
+
+init();
 
 
 // run the rendering loop
