@@ -81,10 +81,10 @@ function initAR() {
 		// to read from the webcam
 		sourceType : 'webcam',
 
-		// sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
-		// sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
-		sourceWidth: 640,
-		sourceHeight: 480,		
+		sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
+		sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
+		// sourceWidth: 640,
+		// sourceHeight: 480,		
 		// displayWidth: 480,
 		// displayHeight: 640,	
 
@@ -113,8 +113,8 @@ function initAR() {
 				matrixCodeType: '3x3',
 				patternRatio: 0.5,
 
-				canvasWidth: arToolkitSource.domElement.videoWidth,
-				canvasHeight: arToolkitSource.domElement.videoHeight
+				// canvasWidth: arToolkitSource.domElement.videoWidth,
+				// canvasHeight: arToolkitSource.domElement.videoHeight
 			})
 			arToolkitContext.init(function onCompleted(){
 				camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
