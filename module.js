@@ -88,6 +88,8 @@ function updateScene(delta) {
 function initAR() {
     console.log('initAR()');
 
+    console.log(navigator.mediaDevices.getSupportedConstraints());
+
     initARSource();
 }
 
