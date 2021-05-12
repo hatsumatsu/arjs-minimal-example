@@ -135,8 +135,10 @@ function initARContext() {
     arToolkitContext.init(() => {
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
 
-        arToolkitContext.arController.orientation = getSourceOrientation();
-        arToolkitContext.arController.options.orientation = getSourceOrientation();
+        // arToolkitContext.arController.orientation = getSourceOrientation();
+        // arToolkitContext.arController.options.orientation = getSourceOrientation();
+
+        onResize();
 
         window.arToolkitContext = arToolkitContext;
 
@@ -227,9 +229,10 @@ function log() {
     console.table({
         screen: `${window.innerWidth} x ${window.innerHeight}`,
         // this is directly copied from above:
-        'requested source': `${window.innerWidth > window.innerHeight ? 640 : 480} x ${
-            window.innerWidth > window.innerHeight ? 480 : 640
-        }`,
+        'requested source': `640 x 480`,
+        //'requested source': `${window.innerWidth > window.innerHeight ? 640 : 480} x ${
+        //    window.innerWidth > window.innerHeight ? 480 : 640
+        // }`,
         arToolkitSource: `${arToolkitSource?.domElement?.videoWidth} x ${arToolkitSource?.domElement?.videoHeight}`,
         'arToolkitContext.arController': `${arToolkitContext?.arController?.width} x ${arToolkitContext?.arController?.height} ${arToolkitContext?.arController?.orientation}`,
         'arToolkitContext.arController.canvas': `${arToolkitContext?.arController?.canvas?.width} x ${arToolkitContext?.arController?.canvas?.height}`,
