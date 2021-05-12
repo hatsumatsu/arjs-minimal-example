@@ -13,7 +13,7 @@
     "license": "ISC",
     "dependencies": {
         "@ar-js-org/ar.js": "https://github.com/AR-js-org/AR.js.git#ecc992c1a628b5f26d437949620bfe6cab386da3",
-        "@hatsumatsu/ar.js": "https://github.com/hatsumatsu/AR.js.git#b1eaef8314c81e875071f08a19fadde95660a1b6",
+        "@hatsumatsu/ar.js": "https://github.com/hatsumatsu/AR.js.git#2038850d4d80e37807d8b550030d354173bce954",
         "three": "^0.127.0"
     },
     "devDependencies": {

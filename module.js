@@ -102,8 +102,8 @@ function initARSource() {
         // sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
         // sourceWidth: 640,
         // sourceHeight: 480,
-        sourceWidth: 640,
-        sourceHeight: 480,
+        sourceWidth: 480,
+        sourceHeight: 640,
     });
 
     arToolkitSource.init(() => {
