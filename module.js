@@ -40,7 +40,7 @@ function initScene() {
         alpha: true,
     });
     renderer.setClearColor(new THREE.Color('black'), 0);
-    renderer.setSize(640, 480);
+    renderer.setSize(640, 480); // gets overwritten with source dimensions
     renderer.setAnimationLoop(() => {
         updateAR();
         updateScene(clock.getDelta());
@@ -104,9 +104,8 @@ function initARSource() {
 
     arToolkitSource = new ArToolkitSource({
         sourceType: 'webcam',
-        // this ensures that we get a landscape video no matter of the device orienation:
-        sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
-        sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
+        sourceWidth: 640,
+        sourceHeight: 480,
     });
 
     arToolkitSource.init(() => {
@@ -227,6 +226,8 @@ function onResize() {
             arToolkitSource?.domElement?.videoWidth;
         arToolkitContext.arController.canvas.height = arToolkitContext.arController.ctx.canvas.height =
             arToolkitSource?.domElement?.videoHeight;
+
+        renderer.setSize(arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
 
         log();
     }, 2000);
