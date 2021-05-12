@@ -138,7 +138,9 @@ function initARContext() {
 
         renderer.setSize(arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
 
+        camera.aspect = arToolkitSource.domElement.videoWidth / arToolkitSource.domElement.videoHeight;
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
+        camera.updateProjectionMatrix();
 
         // onResize();
 
@@ -240,6 +242,7 @@ function log() {
         'arToolkitContext.arController.canvas': `${arToolkitContext?.arController?.canvas?.width} x ${arToolkitContext?.arController?.canvas?.height}`,
         'arToolkitContext.arController.ctx.canvas': `${arToolkitContext?.arController?.ctx?.canvas?.width} x ${arToolkitContext?.arController?.ctx?.canvas?.height}`,
         'arToolkitContext.arController.camera_mat': JSON.stringify(arToolkitContext?.arController?.camera_mat),
+        'threejs renderer': `${renderer?.getSize()?.x} x ${renderer?.getSize()?.y}`,
     });
 
     console.log('arToolkitContext.arController', arToolkitContext?.arController);
