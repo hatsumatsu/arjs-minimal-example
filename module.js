@@ -98,6 +98,8 @@ function initARSource() {
         sourceType: 'webcam',
         // sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
         // sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
+        // sourceWidth: 640,
+        // sourceHeight: 480,
         sourceWidth: 640,
         sourceHeight: 480,
     });
