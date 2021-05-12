@@ -85,6 +85,12 @@ function updateScene(delta) {
 //
 // AR
 //
+function initAR() {
+    console.log('initAR()');
+
+    initARSource();
+}
+
 function initARSource() {
     console.log('initARSource()');
 
@@ -130,8 +136,9 @@ function initARContext() {
         arToolkitContext.arController.orientation = getSourceOrientation();
         arToolkitContext.arController.options.orientation = getSourceOrientation();
 
-        console.log('arToolkitContext', arToolkitContext);
         window.arToolkitContext = arToolkitContext;
+
+        log();
     });
 
     // MARKER
@@ -144,12 +151,6 @@ function initARContext() {
 
     console.log('ArMarkerControls', arMarkerControls);
     window.arMarkerControls = arMarkerControls;
-}
-
-function initAR() {
-    console.log('initAR()');
-
-    initARSource();
 }
 
 function updateAR() {
@@ -194,20 +195,28 @@ function disposeARContext() {
 }
 
 function onResize() {
-    disposeARContext();
-    disposeARSource();
-
     setTimeout(() => {
-        initAR();
-    }, 1000);
+        log();
+    }, 2000);
 }
 
 function bindEvents() {
     window.addEventListener('resize', () => {
-        setTimeout(() => {
-            onResize();
-        }, 1000);
+        onResize();
     });
+}
+
+function log() {
+    console.table({
+        screen: `${window.innerWidth} x ${window.innerHeight}`,
+        arToolkitSource: `${arToolkitSource?.domElement?.videoWidth} x ${arToolkitSource?.domElement?.videoHeight}`,
+        'arToolkitContext.arController': `${arToolkitContext?.arController?.width} x ${arToolkitContext?.arController?.height} ${arToolkitContext?.arController?.orientation}`,
+        'arToolkitContext.arController.canvas': `${arToolkitContext?.arController?.canvas?.width} x ${arToolkitContext?.arController?.canvas?.height}`,
+        'arToolkitContext.arController.ctx.canvas': `${arToolkitContext?.arController?.ctx?.canvas?.width} x ${arToolkitContext?.arController?.ctx?.canvas?.height}`,
+        'arToolkitContext.arController.camera_mat': JSON.stringify(arToolkitContext?.arController?.camera_mat),
+    });
+
+    console.log('arToolkitContext.arController', arToolkitContext?.arController);
 }
 
 function getSourceOrientation() {
