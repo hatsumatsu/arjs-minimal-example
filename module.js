@@ -98,16 +98,17 @@ function initARSource() {
 
     arToolkitSource = new ArToolkitSource({
         sourceType: 'webcam',
-        // sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
-        // sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
-        // sourceWidth: 640,
-        // sourceHeight: 480,
-        sourceWidth: 480,
-        sourceHeight: 640,
+        // this ensures that we get a landscape video no matter of the device orienation:
+        sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
+        sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
     });
 
     arToolkitSource.init(() => {
+        // wait for the video stream being ready to read
+        // source dimensions
         arToolkitSource.domElement.addEventListener('canplay', () => {
+            renderer.setSize(arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
+
             initARContext();
         });
 
@@ -133,27 +134,29 @@ function initARContext() {
         arToolkitContext.arController.orientation = getSourceOrientation();
         arToolkitContext.arController.options.orientation = getSourceOrientation();
 
-        renderer.setSize(arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
-
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
 
-        // MARKER
-        arMarkerControls = new ArMarkerControls(arToolkitContext, camera, {
-            type: 'barcode',
-            barcodeValue: 0,
-            smooth: true,
-            changeMatrixMode: 'cameraTransformMatrix',
-        });
-
-        // onResize();
-
-        window.arToolkitContext = arToolkitContext;
-        window.arMarkerControls = arMarkerControls;
-
-        console.log('ArMarkerControls', arMarkerControls);
+        initARMarkers();
 
         log();
     });
+}
+
+function initARMarkers() {
+    // MARKER
+    arMarkerControls = new ArMarkerControls(arToolkitContext, camera, {
+        type: 'barcode',
+        barcodeValue: 0,
+        smooth: true,
+        changeMatrixMode: 'cameraTransformMatrix',
+    });
+
+    // onResize();
+
+    window.arToolkitContext = arToolkitContext;
+    window.arMarkerControls = arMarkerControls;
+
+    console.log('ArMarkerControls', arMarkerControls);
 }
 
 function updateAR() {
