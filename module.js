@@ -196,6 +196,10 @@ function disposeARContext() {
 
 function onResize() {
     setTimeout(() => {
+        // set contreoller orientation
+        arToolkitContext.arController.orientation = getSourceOrientation();
+        arToolkitContext.arController.options.orientation = getSourceOrientation();
+
         log();
     }, 2000);
 }
@@ -209,6 +213,7 @@ function bindEvents() {
 function log() {
     console.table({
         screen: `${window.innerWidth} x ${window.innerHeight}`,
+        // this is directly copied from above:
         'requested source': `${window.innerWidth > window.innerHeight ? 640 : 480} x ${
             window.innerWidth > window.innerHeight ? 480 : 640
         }`,
