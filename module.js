@@ -209,6 +209,9 @@ function bindEvents() {
 function log() {
     console.table({
         screen: `${window.innerWidth} x ${window.innerHeight}`,
+        'requested source': `${window.innerWidth > window.innerHeight ? 640 : 480} x ${
+            window.innerWidth > window.innerHeight ? 480 : 640
+        }`,
         arToolkitSource: `${arToolkitSource?.domElement?.videoWidth} x ${arToolkitSource?.domElement?.videoHeight}`,
         'arToolkitContext.arController': `${arToolkitContext?.arController?.width} x ${arToolkitContext?.arController?.height} ${arToolkitContext?.arController?.orientation}`,
         'arToolkitContext.arController.canvas': `${arToolkitContext?.arController?.canvas?.width} x ${arToolkitContext?.arController?.canvas?.height}`,
