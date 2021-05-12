@@ -104,6 +104,7 @@ function initARSource() {
 
     arToolkitSource = new ArToolkitSource({
         sourceType: 'webcam',
+        // this returns a portrait/landscape stream based on device orientation...
         sourceWidth: 640,
         sourceHeight: 480,
     });
