@@ -1,0 +1,53 @@
+// state after setting dimensions on resize...
+
+
+Logging properties related to dimensions:
+
+### A Load on portrait
+
+#### Initial
+
+screen	                                    "393 x 727"
+requested source	                        "480 x 640"
+arToolkitSource	                            "640 x 480"
+arToolkitContext.arController	            "640 x 480 landscape"
+arToolkitContext.arController.canvas	    "640 x 480"
+arToolkitContext.arController.ctx.canvas	"640 x 480"
+arToolkitContext.arController.camera_mat	"{"0":1.9072469771101737,"1":0,"2":0,"3":0,"4":0,"5":2.5324476977165236,"6":0,"7":0,"8":-0.01235651484864042,"9":-0.007905900353927464,"10":-1.0000002000000199,"11":-1,"12":0,"13":0,"14":-0.00020000002000000202,"15":0}"
+
+#### Then turn to landscape
+
+screen	                                    "802 x 293"
+requested source	                        "640 x 480"
+arToolkitSource	                            "480 x 640"
+arToolkitContext.arController	            "480 x 640 portrait"
+arToolkitContext.arController.canvas	    "480 x 640"
+arToolkitContext.arController.ctx.canvas    "480 x 640"
+arToolkitContext.arController.camera_mat	"{"0":1.9072469771101737,"1":0,"2":0,"3":0,"4":0,"5":2.5324476977165236,"6":0,"7":0,"8":-0.01235651484864042,"9":-0.007905900353927464,"10":-1.0000002000000199,"11":-1,"12":0,"13":0,"14":-0.00020000002000000202,"15":0}"
+
+
+
+
+
+
+### B Load on landscape
+
+#### Initial
+
+screen	                                    "802 x 293"
+requested source	                        "640 x 480"
+arToolkitSource                         	"640 x 480"
+arToolkitContext.arController	            "640 x 480 landscape"
+arToolkitContext.arController.canvas	    "640 x 480"
+arToolkitContext.arController.ctx.canvas	"640 x 480"
+arToolkitContext.arController.camera_mat	"{"0":1.9072469771101737,"1":0,"2":0,"3":0,"4":0,"5":2.5324476977165236,"6":0,"7":0,"8":-0.01235651484864042,"9":-0.007905900353927464,"10":-1.0000002000000199,"11":-1,"12":0,"13":0,"14":-0.00020000002000000202,"15":0}"
+
+#### Then turn to portrait
+
+screen	                                    "393 x 727"
+requested source	                        "480 x 640"
+arToolkitSource	                            "480 x 640"
+arToolkitContext.arController	            "480 x 640 portrait"
+arToolkitContext.arController.canvas    	"480 x 640"
+arToolkitContext.arController.ctx.canvas	"480 x 640"
+arToolkitContext.arController.camera_mat	"{"0":1.9072469771101737,"1":0,"2":0,"3":0,"4":0,"5":2.5324476977165236,"6":0,"7":0,"8":-0.01235651484864042,"9":-0.007905900353927464,"10":-1.0000002000000199,"11":-1,"12":0,"13":0,"14":-0.00020000002000000202,"15":0}"
