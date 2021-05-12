@@ -916,9 +916,9 @@
     "@babel/helper-validator-identifier" "^7.14.0"
     to-fast-properties "^2.0.0"
 
-"@hatsumatsu/ar.js@https://github.com/hatsumatsu/AR.js.git#fce66fe93cfe44bdb357c2b9ba33c247a811dc0b":
+"@hatsumatsu/ar.js@https://github.com/hatsumatsu/AR.js.git#4f22c6a0dcaa01843ffe77b3dd124148c09f9e6b":
   version "3.3.1"
-  resolved "https://github.com/hatsumatsu/AR.js.git#fce66fe93cfe44bdb357c2b9ba33c247a811dc0b"
+  resolved "https://github.com/hatsumatsu/AR.js.git#4f22c6a0dcaa01843ffe77b3dd124148c09f9e6b"
   dependencies:
     "@ar-js-org/artoolkit5-js" "0.1.0"
     "@hatsumatsu/artoolkit5-js" "https://github.com/hatsumatsu/artoolkit5-js.git#81f5d8efe738b7c8d5a1003464d4e96ee5db5221"
