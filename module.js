@@ -139,8 +139,10 @@ function initARContext() {
         renderer.setSize(arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
 
         camera.aspect = arToolkitSource.domElement.videoWidth / arToolkitSource.domElement.videoHeight;
+        console.log('camera.aspect', camera.aspect);
         camera.updateProjectionMatrix();
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
+        console.log('camera.aspect', camera.aspect);
 
         // MARKER
         arMarkerControls = new ArMarkerControls(arToolkitContext, camera, {
