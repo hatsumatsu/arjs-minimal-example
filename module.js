@@ -130,9 +130,15 @@ function initARContext() {
         arToolkitContext.arController.orientation = getSourceOrientation();
         arToolkitContext.arController.options.orientation = getSourceOrientation();
 
+        initARMarkers();
+
         console.log('arToolkitContext', arToolkitContext);
         window.arToolkitContext = arToolkitContext;
     });
+}
+
+function initARMarkers() {
+    console.log('initARMarkers()');
 
     // MARKER
     arMarkerControls = new ArMarkerControls(arToolkitContext, camera, {
@@ -153,7 +159,7 @@ function initAR() {
 }
 
 function updateAR() {
-    if (!arToolkitContext || !arToolkitSource || !arToolkitSource.ready) {
+    if (!arToolkitContext || !arToolkitSource || !arToolkitSource.ready || !arMarkerControls) {
         return;
     }
 
@@ -190,23 +196,32 @@ function disposeARContext() {
         arToolkitContext.arController.dispose();
     }
 
+    if (arMarkerControls?.dispose) {
+        arMarkerControls.dispose();
+    }
+
     arToolkitContext = null;
+    arMarkerControls = null;
 }
+
+var initTimer = null;
 
 function onResize() {
     disposeARContext();
     disposeARSource();
 
-    setTimeout(() => {
+    if (initTimer) {
+        clearInterval(initTimer);
+    }
+
+    initTimer = setTimeout(() => {
         initAR();
-    }, 1000);
+    }, 500);
 }
 
 function bindEvents() {
     window.addEventListener('resize', () => {
-        setTimeout(() => {
-            onResize();
-        }, 1000);
+        onResize();
     });
 }
 
