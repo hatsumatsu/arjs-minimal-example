@@ -128,17 +128,17 @@ function initARContext() {
         matrixCodeType: '3x3',
         patternRatio: 0.5,
 
-        // canvasWidth: arToolkitSource.domElement.videoWidth,
-        // canvasHeight: arToolkitSource.domElement.videoHeight
+        canvasWidth: arToolkitSource.domElement.videoWidth,
+        canvasHeight: arToolkitSource.domElement.videoHeight,
     });
 
     arToolkitContext.init(() => {
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
 
-        // arToolkitContext.arController.orientation = getSourceOrientation();
-        // arToolkitContext.arController.options.orientation = getSourceOrientation();
+        arToolkitContext.arController.orientation = getSourceOrientation();
+        arToolkitContext.arController.options.orientation = getSourceOrientation();
 
-        onResize();
+        // onResize();
 
         window.arToolkitContext = arToolkitContext;
 
