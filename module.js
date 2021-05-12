@@ -1,3 +1,9 @@
+// What we learned:
+// Apparently there is no way to have a ArToolkitContext working well with a portrait mode video stream
+//
+//
+//
+
 import {
     ArToolkitProfile,
     ArToolkitSource,
