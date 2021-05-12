@@ -17,3 +17,7 @@ video {
     margin: 0 !important;
     object-fit: contain !important;
 }
+
+canvas {
+    outline: 1px dashed red;
+}

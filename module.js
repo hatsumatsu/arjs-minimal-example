@@ -104,13 +104,6 @@ function initARSource() {
 
     arToolkitSource.init(() => {
         arToolkitSource.domElement.addEventListener('canplay', () => {
-            console.log(
-                'canplay',
-                'actual source dimensions',
-                arToolkitSource.domElement.videoWidth,
-                arToolkitSource.domElement.videoHeight
-            );
-
             initARContext();
         });
 
@@ -137,6 +130,7 @@ function initARContext() {
         arToolkitContext.arController.options.orientation = getSourceOrientation();
 
         renderer.setSize(arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
+
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
 
         // MARKER
@@ -159,7 +153,7 @@ function initARContext() {
 }
 
 function updateAR() {
-    if (!arToolkitContext || !arToolkitSource || !arToolkitSource.ready) {
+    if (!arToolkitContext || !arToolkitSource || !arToolkitSource.ready || !arMarkerControls) {
         return;
     }
 
