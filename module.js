@@ -138,9 +138,7 @@ function initARContext() {
 
         renderer.setSize(arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
 
-        camera.aspect = arToolkitSource.domElement.videoWidth / arToolkitSource.domElement.videoHeight;
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
-        camera.updateProjectionMatrix();
 
         // onResize();
 
@@ -199,7 +197,12 @@ function disposeARContext() {
         arToolkitContext.arController.dispose();
     }
 
+    if (arMarkerControls?.dispose) {
+        arMarkerControls.dispose();
+    }
+
     arToolkitContext = null;
+    arMarkerControls = null;
 }
 
 function onResize() {
