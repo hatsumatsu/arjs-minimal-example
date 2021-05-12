@@ -133,10 +133,12 @@ function initARContext() {
     });
 
     arToolkitContext.init(() => {
-        camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
-
         arToolkitContext.arController.orientation = getSourceOrientation();
         arToolkitContext.arController.options.orientation = getSourceOrientation();
+
+        renderer.setSize(arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
+
+        camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
 
         // onResize();
 
