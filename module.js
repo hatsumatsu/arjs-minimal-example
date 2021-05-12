@@ -196,9 +196,13 @@ function disposeARContext() {
 
 function onResize() {
     setTimeout(() => {
-        // set contreoller orientation
+        // set controller orientation
         arToolkitContext.arController.orientation = getSourceOrientation();
         arToolkitContext.arController.options.orientation = getSourceOrientation();
+
+        // set controller dimensions
+        arToolkitContext.arController.width = arToolkitSource?.domElement?.videoWidth;
+        arToolkitContext.arController.height = arToolkitSource?.domElement?.videoHeight;
 
         log();
     }, 2000);
