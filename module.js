@@ -140,23 +140,23 @@ function initARContext() {
 
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
 
+        // MARKER
+        arMarkerControls = new ArMarkerControls(arToolkitContext, camera, {
+            type: 'barcode',
+            barcodeValue: 0,
+            smooth: true,
+            changeMatrixMode: 'cameraTransformMatrix',
+        });
+
         // onResize();
 
         window.arToolkitContext = arToolkitContext;
+        window.arMarkerControls = arMarkerControls;
+
+        console.log('ArMarkerControls', arMarkerControls);
 
         log();
     });
-
-    // MARKER
-    arMarkerControls = new ArMarkerControls(arToolkitContext, camera, {
-        type: 'barcode',
-        barcodeValue: 0,
-        smooth: true,
-        changeMatrixMode: 'cameraTransformMatrix',
-    });
-
-    console.log('ArMarkerControls', arMarkerControls);
-    window.arMarkerControls = arMarkerControls;
 }
 
 function updateAR() {
