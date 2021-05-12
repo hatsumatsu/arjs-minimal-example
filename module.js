@@ -48,7 +48,7 @@ function initScene() {
     scene = new THREE.Scene();
 
     // CAMERA
-    camera = new THREE.Camera();
+    camera = new THREE.PerspectiveCamera();
     scene.add(camera);
 
     scene.visible = false;
@@ -138,6 +138,8 @@ function initARContext() {
 
         renderer.setSize(arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
 
+        camera.aspect = arToolkitSource.domElement.videoWidth / arToolkitSource.domElement.videoHeight;
+        camera.updateProjectionMatrix();
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
 
         // MARKER
