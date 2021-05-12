@@ -196,10 +196,6 @@ function disposeARContext() {
         arToolkitContext.arController.dispose();
     }
 
-    if (arMarkerControls?.dispose) {
-        arMarkerControls.dispose();
-    }
-
     arToolkitContext = null;
     arMarkerControls = null;
 }
