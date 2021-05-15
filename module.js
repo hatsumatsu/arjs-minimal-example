@@ -209,15 +209,14 @@ function disposeARContext() {
 var initTimer = null;
 
 function onResize() {
-    disposeAR();
-
     if (initTimer) {
         clearInterval(initTimer);
     }
 
     initTimer = setTimeout(() => {
+        disposeAR();
         initAR();
-    }, 500);
+    }, 1000);
 }
 
 function bindEvents() {
