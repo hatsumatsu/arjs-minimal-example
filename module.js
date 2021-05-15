@@ -192,12 +192,9 @@ function disposeAR() {
 function disposeARSource() {
     console.log('disposeARSource()');
 
-    if (!arToolkitSource) {
-        return;
+    if (arToolkitSource) {
+        arToolkitSource.dispose();
     }
-
-    arToolkitSource.dispose();
-
     arToolkitSource = null;
 }
 
