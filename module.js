@@ -102,16 +102,14 @@ function initARSource() {
     arToolkitSource.init(() => {
         arToolkitSource.domElement.addEventListener('canplay', () => {
             console.log(
+                'arToolkitSource',
                 'canplay',
                 'actual source dimensions',
-                arToolkitSource.domElement.videoWidth,
-                arToolkitSource.domElement.videoHeight
+                `${arToolkitSource.domElement.videoWidth} x ${arToolkitSource.domElement.videoHeight}`
             );
 
             initARContext();
         });
-
-        window.arToolkitSource = arToolkitSource;
     });
 }
 
@@ -137,13 +135,12 @@ function initARContext() {
     arToolkitContext.init(() => {
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
 
-        arToolkitContext.arController.orientation = getSourceOrientation();
-        arToolkitContext.arController.options.orientation = getSourceOrientation();
+        // arToolkitContext.arController.orientation = getSourceOrientation();
+        // arToolkitContext.arController.options.orientation = getSourceOrientation();
 
         initARMarkers();
 
         console.log('arToolkitContext', arToolkitContext);
-        window.arToolkitContext = arToolkitContext;
     });
 }
 
@@ -159,7 +156,6 @@ function initARMarkers() {
     });
 
     console.log('ArMarkerControls', arMarkerControls);
-    window.arMarkerControls = arMarkerControls;
 }
 
 function initAR() {
@@ -244,16 +240,13 @@ function getSourceOrientation() {
     }
 
     console.log(
-        'actual source dimensions',
-        arToolkitSource.domElement.videoWidth,
-        arToolkitSource.domElement.videoHeight
+        'getSourceOrientation()',
+        `${arToolkitSource.domElement.videoWidth} x ${arToolkitSource.domElement.videoHeight}`
     );
 
     if (arToolkitSource.domElement.videoWidth > arToolkitSource.domElement.videoHeight) {
-        console.log('source orientation', 'landscape');
         return 'landscape';
     } else {
-        console.log('source orientation', 'portrait');
         return 'portrait';
     }
 }
