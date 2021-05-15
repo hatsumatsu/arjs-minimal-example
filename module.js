@@ -210,7 +210,7 @@ var initTimer = null;
 
 function onResize() {
     if (initTimer) {
-        clearInterval(initTimer);
+        clearTimeout(initTimer);
     }
 
     initTimer = setTimeout(() => {
