@@ -95,6 +95,7 @@ function initARSource() {
 
     arToolkitSource = new ArToolkitSource({
         sourceType: 'webcam',
+        // creates a landscape webcam stream no matter what the device orientation is...
         sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
         sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
     });
