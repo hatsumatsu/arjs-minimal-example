@@ -88,6 +88,11 @@ function updateScene(delta) {
 function initARSource() {
     console.log('initARSource()');
 
+    if (arToolkitSource) {
+        console.warn('ArToolkitSource is already initiated.');
+        return;
+    }
+
     arToolkitSource = new ArToolkitSource({
         sourceType: 'webcam',
         sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
@@ -112,6 +117,11 @@ function initARSource() {
 
 function initARContext() {
     console.log('initARContext()');
+
+    if (arToolkitContext) {
+        console.warn('ArToolkitContext is already initiated.');
+        return;
+    }
 
     // CONTEXT
     arToolkitContext = new ArToolkitContext({
@@ -172,15 +182,21 @@ function updateAR() {
     scene.visible = camera.visible;
 }
 
+function disposeAR() {
+    console.log('disposeAR()');
+
+    disposeARSource();
+    disposeARContext();
+}
+
 function disposeARSource() {
     console.log('disposeARSource()');
 
-    const video = document.querySelector('#arjs-video');
-
-    if (video) {
-        video?.srcObject?.getTracks().map((track) => track.stop());
-        video.remove();
+    if (!arToolkitSource) {
+        return;
     }
+
+    arToolkitSource.dispose();
 
     arToolkitSource = null;
 }
@@ -188,23 +204,19 @@ function disposeARSource() {
 function disposeARContext() {
     console.log('disposeARContext()');
 
-    if (arToolkitContext?.arController?.cameraParam?.dispose) {
-        arToolkitContext.arController.cameraParam.dispose();
+    if (arToolkitContext) {
+        arToolkitContext.dispose();
     }
-
-    if (arToolkitContext?.arController?.dispose) {
-        arToolkitContext.arController.dispose();
-    }
-
     arToolkitContext = null;
+
+    // arMarkerControls are already disposed in `arToolkitContext.dispose()`
     arMarkerControls = null;
 }
 
 var initTimer = null;
 
 function onResize() {
-    disposeARContext();
-    disposeARSource();
+    disposeAR();
 
     if (initTimer) {
         clearInterval(initTimer);
@@ -218,6 +230,14 @@ function onResize() {
 function bindEvents() {
     window.addEventListener('resize', () => {
         onResize();
+    });
+
+    document.querySelector('[data-ui-role="init"]').addEventListener('click', () => {
+        initAR();
+    });
+
+    document.querySelector('[data-ui-role="dispose"]').addEventListener('click', () => {
+        disposeAR();
     });
 }
 

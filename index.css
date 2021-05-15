@@ -17,3 +17,10 @@ video {
     margin: 0 !important;
     object-fit: contain !important;
 }
+
+.ui {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
